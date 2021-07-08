@@ -1,0 +1,310 @@
+{
+  "intents": [
+    {
+      "intent": "survey",
+      "examples": [
+        {
+          "text": "appraise"
+        },
+        {
+          "text": "assess"
+        },
+        {
+          "text": "can I rate my experience"
+        },
+        {
+          "text": "evaluate"
+        },
+        {
+          "text": "gauge"
+        },
+        {
+          "text": "grade"
+        },
+        {
+          "text": "rank"
+        },
+        {
+          "text": "rate"
+        },
+        {
+          "text": "rate my experience"
+        },
+        {
+          "text": "survey"
+        },
+        {
+          "text": "take account of my experience"
+        },
+        {
+          "text": "valuate"
+        }
+      ],
+      "description": ""
+    }
+  ],
+  "entities": [
+    {
+      "entity": "sys-number",
+      "values": [],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "dialog_nodes": [
+    {
+      "type": "standard",
+      "title": "Anything else",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "I didn't understand. You can try rephrasing."
+              },
+              {
+                "text": "Can you reword your statement? I'm not understanding."
+              },
+              {
+                "text": "I didn't get your meaning."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "Anything else",
+      "previous_sibling": "node_10_1625733997582",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_6_1625737478937",
+      "context": {
+        "second_question": "@sys-number"
+      },
+      "conditions": "@sys-number",
+      "event_name": "input",
+      "dialog_node": "handler_10_1625737478938"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "How likely are you to return to our website?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "slot_8_1625737498164",
+      "event_name": "focus",
+      "dialog_node": "handler_10_1625737498164",
+      "previous_sibling": "handler_4_1625737498164"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Rate your satisfaction with our team."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "slot_6_1625737478937",
+      "event_name": "focus",
+      "dialog_node": "handler_3_1625737478938",
+      "previous_sibling": "handler_10_1625737478938"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_8_1625737498164",
+      "context": {
+        "third_question": "@sys-number"
+      },
+      "conditions": "@sys-number",
+      "event_name": "input",
+      "dialog_node": "handler_4_1625737498164"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_9_1625737421744",
+      "context": {
+        "first_question": "@sys-number"
+      },
+      "conditions": "@sys-number",
+      "event_name": "input",
+      "dialog_node": "handler_7_1625737421763"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "how satisfied are you with your experience today?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "slot_9_1625737421744",
+      "event_name": "focus",
+      "dialog_node": "handler_8_1625737421763",
+      "previous_sibling": "handler_7_1625737421763"
+    },
+    {
+      "type": "frame",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "On a scale of 1 to 10, answer the following questions:"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "next_step": {
+        "behavior": "skip_user_input"
+      },
+      "conditions": "#survey",
+      "dialog_node": "node_10_1625733997582",
+      "previous_sibling": "Welcome"
+    },
+    {
+      "type": "frame",
+      "title": "Survey",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Thank you."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_10_1625733997582",
+      "conditions": "true",
+      "dialog_node": "node_6_1625737358892"
+    },
+    {
+      "type": "slot",
+      "parent": "node_6_1625737358892",
+      "variable": "$second_question",
+      "dialog_node": "slot_6_1625737478937",
+      "previous_sibling": "slot_9_1625737421744"
+    },
+    {
+      "type": "slot",
+      "parent": "node_6_1625737358892",
+      "variable": "$third_question",
+      "dialog_node": "slot_8_1625737498164",
+      "previous_sibling": "slot_6_1625737478937"
+    },
+    {
+      "type": "slot",
+      "output": {},
+      "parent": "node_6_1625737358892",
+      "variable": "$first_question",
+      "dialog_node": "slot_9_1625737421744"
+    },
+    {
+      "type": "standard",
+      "title": "Welcome",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Hello!!"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          },
+          {
+            "title": "would you like to take a survey?",
+            "options": [
+              {
+                "label": "Yes",
+                "value": {
+                  "input": {
+                    "text": "Yes, I would like to take a survey."
+                  }
+                }
+              },
+              {
+                "label": "No",
+                "value": {
+                  "input": {
+                    "text": "No, I don't want to do it."
+                  }
+                }
+              }
+            ],
+            "response_type": "option"
+          }
+        ]
+      },
+      "conditions": "welcome",
+      "dialog_node": "Welcome"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "off_topic": {
+      "enabled": true
+    },
+    "disambiguation": {
+      "prompt": "Did you mean:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "None of the above"
+    },
+    "human_agent_assist": {
+      "prompt": "Did you mean:"
+    },
+    "intent_classification": {
+      "training_backend_version": "v2"
+    },
+    "spelling_auto_correct": true
+  },
+  "learning_opt_out": false,
+  "name": "Customer",
+  "language": "en",
+  "description": ""
+}
